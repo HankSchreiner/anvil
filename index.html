@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anvil — Forge Your Edge in the Markets</title>
+<meta name="description" content="Anvil builds AI day-trading bots for the Nasdaq. Start free with the Benchmark bot, learn the craft in our community, and step up to Apprentice when you're ready.">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+  :root{
+    --iron:#0e0f12;
+    --iron-2:#15171c;
+    --steel:#2a2e37;
+    --steel-line:#33383f;
+    --ash:#9aa1ad;
+    --smoke:#c7ccd4;
+    --paper:#f2efe9;
+    --ember:#ff6a2b;
+    --ember-2:#ff9145;
+    --spark:#ffd27a;
+    --glow:rgba(255,106,43,.35);
+    --font-display:"Georgia","Times New Roman",serif;
+    --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--iron);
+    color:var(--smoke);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  section{position:relative}
+
+  /* ---- Buttons ---- */
+  .btn{
+    display:inline-block;
+    padding:14px 28px;
+    border-radius:8px;
+    font-weight:700;
+    letter-spacing:.02em;
+    font-size:15px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-ember{
+    background:linear-gradient(135deg,var(--ember),var(--ember-2));
+    color:#1a0f08;
+    box-shadow:0 8px 30px -8px var(--glow);
+  }
+  .btn-ember:hover{transform:translateY(-2px);box-shadow:0 14px 40px -8px var(--glow)}
+  .btn-ghost{
+    background:transparent;
+    border:1px solid var(--steel-line);
+    color:var(--smoke);
+  }
+  .btn-ghost:hover{border-color:var(--ember);color:var(--paper);transform:translateY(-2px)}
+
+  /* ---- Nav ---- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,15,18,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--steel-line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--paper);letter-spacing:.04em}
+  .brand .mark{
+    width:34px;height:34px;flex:none;
+    border-radius:50%;
+    object-fit:cover;
+    filter:drop-shadow(0 0 10px var(--glow));
+  }
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14.5px;color:var(--ash);transition:color .15s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-cta{font-size:14px!important;padding:10px 20px}
+  .menu-btn{display:none;background:none;border:0;color:var(--paper);font-size:26px;cursor:pointer}
+
+  /* ---- Hero ---- */
+  .hero{padding:96px 0 88px;text-align:center;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(60% 55% at 50% 0%, rgba(255,106,43,.18), transparent 70%),
+      radial-gradient(40% 40% at 50% 8%, rgba(255,210,122,.10), transparent 70%);
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .eyebrow{
+    display:inline-block;
+    font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ember-2);
+    border:1px solid var(--steel-line);
+    padding:7px 16px;border-radius:999px;
+    background:rgba(255,106,43,.05);
+    margin-bottom:28px;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(38px,6.2vw,74px);
+    line-height:1.03;
+    color:var(--paper);
+    font-weight:700;
+    letter-spacing:-.01em;
+    margin-bottom:24px;
+  }
+  h1 .lit{
+    background:linear-gradient(120deg,var(--spark),var(--ember));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p.lead{
+    max-width:640px;margin:0 auto 38px;
+    font-size:clamp(17px,2.1vw,20px);color:var(--ash);
+  }
+  .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .hero-note{margin-top:22px;font-size:13px;color:#6f7681}
+
+  /* subtle ember bar under hero */
+  .forge-line{
+    height:1px;width:100%;
+    background:linear-gradient(90deg,transparent,var(--ember),var(--spark),var(--ember),transparent);
+    opacity:.5;
+  }
+
+  /* ---- Section framing ---- */
+  .sec{padding:88px 0}
+  .sec-head{max-width:680px;margin:0 auto 56px;text-align:center}
+  .sec-head .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ember-2);margin-bottom:14px}
+  .sec-head h2{font-family:var(--font-display);font-size:clamp(28px,4vw,42px);color:var(--paper);line-height:1.1;margin-bottom:16px}
+  .sec-head p{color:var(--ash);font-size:17px}
+
+  /* ---- Philosophy strip ---- */
+  .philosophy{background:var(--iron-2);border-top:1px solid var(--steel-line);border-bottom:1px solid var(--steel-line)}
+  .creed{max-width:820px;margin:0 auto;text-align:center}
+  .creed p{font-family:var(--font-display);font-size:clamp(21px,3vw,30px);color:var(--smoke);line-height:1.35}
+  .creed .em{color:var(--ember-2)}
+
+  /* ---- Feature grid ---- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:linear-gradient(180deg,var(--iron-2),#111318);
+    border:1px solid var(--steel-line);
+    border-radius:14px;padding:30px 26px;
+    transition:transform .18s ease,border-color .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);border-color:#484d57}
+  .card .ico{
+    width:46px;height:46px;border-radius:10px;margin-bottom:18px;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,106,43,.10);border:1px solid rgba(255,106,43,.25);
+    font-size:22px;
+  }
+  .card h3{color:var(--paper);font-size:19px;margin-bottom:10px;font-family:var(--font-display)}
+  .card p{color:var(--ash);font-size:15px}
+
+  /* ---- Steps ---- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+  .step{padding:0 26px;text-align:center;position:relative}
+  .step:not(:last-child)::after{
+    content:"";position:absolute;top:26px;right:-1px;width:2px;height:calc(100% - 26px);
+    background:linear-gradient(180deg,var(--steel-line),transparent);
+  }
+  .step .num{
+    width:54px;height:54px;margin:0 auto 20px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--spark);
+    background:radial-gradient(circle at 50% 35%,rgba(255,106,43,.25),var(--iron-2));
+    border:1px solid rgba(255,106,43,.4);
+    box-shadow:0 0 24px -6px var(--glow);
+  }
+  .step h3{color:var(--paper);font-size:19px;margin-bottom:8px}
+  .step p{color:var(--ash);font-size:15px}
+
+  /* ---- Pricing ---- */
+  .tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:860px;margin:0 auto}
+  .tier{
+    background:var(--iron-2);border:1px solid var(--steel-line);border-radius:16px;padding:36px 32px;
+    display:flex;flex-direction:column;
+  }
+  .tier.featured{
+    border-color:rgba(255,106,43,.55);
+    box-shadow:0 20px 60px -30px var(--glow);
+    background:linear-gradient(180deg,#191216,var(--iron-2));
+    position:relative;
+  }
+  .tier.featured .flag{
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:linear-gradient(135deg,var(--ember),var(--ember-2));color:#1a0f08;
+    font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+    padding:6px 16px;border-radius:999px;
+  }
+  .tier .tname{font-family:var(--font-display);font-size:24px;color:var(--paper);margin-bottom:6px}
+  .tier .tsub{color:var(--ash);font-size:14.5px;margin-bottom:22px;min-height:42px}
+  .tier .price{font-size:44px;font-family:var(--font-display);color:var(--paper);line-height:1;margin-bottom:4px}
+  .tier .price span{font-size:16px;color:var(--ash);font-family:var(--font-body)}
+  .tier .price.free{color:var(--spark)}
+  .tier ul{list-style:none;margin:26px 0 30px;flex:1}
+  .tier li{position:relative;padding-left:28px;margin-bottom:13px;font-size:15px;color:var(--smoke)}
+  .tier li::before{
+    content:"";position:absolute;left:0;top:8px;width:14px;height:8px;
+    border-left:2px solid var(--ember);border-bottom:2px solid var(--ember);
+    transform:rotate(-45deg);border-radius:1px;
+  }
+  .tier .btn{width:100%;text-align:center}
+
+  /* ---- Community CTA ---- */
+  .community{
+    background:linear-gradient(180deg,var(--iron),#120d10);
+    border-top:1px solid var(--steel-line);
+    text-align:center;
+  }
+  .community .glowbox{
+    max-width:760px;margin:0 auto;padding:64px 40px;
+    border:1px solid var(--steel-line);border-radius:20px;
+    background:radial-gradient(70% 120% at 50% 0%,rgba(255,106,43,.12),transparent 70%),var(--iron-2);
+  }
+  .community h2{font-family:var(--font-display);font-size:clamp(28px,4vw,40px);color:var(--paper);margin-bottom:16px}
+  .community p{color:var(--ash);max-width:520px;margin:0 auto 30px;font-size:17px}
+
+  /* ---- Footer ---- */
+  footer{background:var(--iron-2);border-top:1px solid var(--steel-line);padding:56px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:36px}
+  .foot-brand{max-width:320px}
+  .foot-brand .brand{margin-bottom:12px}
+  .foot-brand p{color:var(--ash);font-size:14px}
+  .foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot-col h4{color:var(--paper);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+  .foot-col a{display:block;color:var(--ash);font-size:14.5px;margin-bottom:9px;transition:color .15s}
+  .foot-col a:hover{color:var(--paper)}
+  .disclaimer{
+    border-top:1px solid var(--steel-line);padding-top:26px;
+    font-size:12.5px;line-height:1.7;color:#6f7681;
+  }
+  .disclaimer strong{color:var(--ash)}
+  .foot-legal{margin-top:20px;font-size:12.5px;color:#5c626c;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* ---- Responsive ---- */
+  @media(max-width:860px){
+    .grid,.steps,.tiers{grid-template-columns:1fr}
+    .step:not(:last-child)::after{display:none}
+    .step{padding:26px 0;border-bottom:1px solid var(--steel-line)}
+    .step:last-child{border-bottom:0}
+    .nav-links{
+      display:none;position:absolute;top:68px;left:0;right:0;
+      flex-direction:column;gap:0;
+      background:var(--iron-2);border-bottom:1px solid var(--steel-line);padding:8px 0;
+    }
+    .nav-links.open{display:flex}
+    .nav-links a{padding:14px 24px;width:100%}
+    .nav-links .nav-cta{margin:10px 24px;text-align:center}
+    .menu-btn{display:block}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <img class="mark" src="logo.png" alt="Anvil logo">
+      ANVIL
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#craft">The Craft</a>
+      <a href="#how">How It Works</a>
+      <a href="#tiers">Tiers</a>
+      <a href="#community">Community</a>
+      <!-- TODO: replace # with your real Benchmark signup URL -->
+      <a href="#" class="btn btn-ember nav-cta">Try Benchmark — Free</a>
+    </nav>
+    <button class="menu-btn" id="menubtn" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">AI trading bots for the Nasdaq</span>
+    <h1>Forge your edge<br>at the <span class="lit">anvil</span>.</h1>
+    <p class="lead">
+      Anvil builds AI day-trading bots for traders who want to sharpen a real skill —
+      not chase a jackpot. Start with the free Benchmark bot, learn the craft alongside
+      the community, and pick up the hammer when you're ready.
+    </p>
+    <div class="hero-cta">
+      <!-- TODO: replace # with your real Benchmark signup URL -->
+      <a href="#" class="btn btn-ember">Try the Benchmark bot — free</a>
+      <a href="#tiers" class="btn btn-ghost">See the Apprentice tier</a>
+    </div>
+    <p class="hero-note">Free to start. No card required for Benchmark.</p>
+  </div>
+</section>
+
+<div class="forge-line"></div>
+
+<!-- PHILOSOPHY -->
+<section class="sec philosophy">
+  <div class="wrap creed">
+    <p>
+      Steel doesn't sharpen itself. We build <span class="em">tools</span> and a
+      <span class="em">community</span> so you can build the one thing that actually
+      compounds — <span class="em">your own skill at the screen.</span>
+    </p>
+  </div>
+</section>
+
+<!-- THE CRAFT / FEATURES -->
+<section class="sec" id="craft">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Why Anvil</div>
+      <h2>Built like a workshop, not a slot machine</h2>
+      <p>Every part of Anvil is designed to make you a more deliberate trader.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">⚒️</div>
+        <h3>Bots you actually run</h3>
+        <p>The Benchmark bot is a real, working tool you can put on the Nasdaq from day one — free. Learn how it thinks before you ever pay a cent.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📓</div>
+        <h3>Learn the craft</h3>
+        <p>Guides, breakdowns, and a community that talks process over hype. We help you understand the tool, the market, and the discipline behind both.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔥</div>
+        <h3>A forge, not a firehose</h3>
+        <p>No spammy signals, no "get rich" theatrics. Just steady, honest craftsmanship and traders sharpening steel next to you.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>Straight talk on risk</h3>
+        <p>Trading carries real risk of loss, and we say so plainly. Anvil hands you better tools — it never promises the market.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🧩</div>
+        <h3>Made to be understood</h3>
+        <p>Configurable, transparent, and documented. You should know what your bot is doing and why — not treat it as a black box.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🤝</div>
+        <h3>Discord is the workshop</h3>
+        <p>The whole community lives in Discord — where questions get answered, setups get discussed, and the free tier becomes a real habit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec philosophy" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The path</div>
+      <h2>From spark to steel</h2>
+      <p>Three steps. No pressure. Start free and move at your own pace.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Light the forge</h3>
+        <p>Set up the free Benchmark bot and connect with the community in Discord. Get hands-on before you commit to anything.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Learn to hammer</h3>
+        <p>Study how the bot reads the Nasdaq, ask questions, and build your process alongside traders doing the same work.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Take up Apprentice</h3>
+        <p>When you want the sharper tools and deeper access, step up to Apprentice at $149/month — on your terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="sec" id="tiers">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Tiers</div>
+      <h2>Start free. Step up when it's earned.</h2>
+      <p>Benchmark gets you working. Apprentice sharpens the edge.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tname">Benchmark</div>
+        <div class="tsub">The free, working bot — your first day at the forge.</div>
+        <div class="price free">Free</div>
+        <ul>
+          <li>A real AI day-trading bot for the Nasdaq</li>
+          <li>Full access to the Discord community</li>
+          <li>Getting-started guides and setup help</li>
+          <li>No card required to begin</li>
+        </ul>
+        <!-- TODO: replace # with your real Benchmark signup URL -->
+        <a href="#" class="btn btn-ghost">Start with Benchmark</a>
+      </div>
+      <div class="tier featured">
+        <span class="flag">The Craftsman's Tier</span>
+        <div class="tname">Apprentice</div>
+        <div class="tsub">Sharper tools, deeper access, and the community's inner workshop.</div>
+        <div class="price">$149<span> / month</span></div>
+        <ul>
+          <li>Everything in Benchmark</li>
+          <li>The full Apprentice bot toolkit</li>
+          <li>Priority community access & support</li>
+          <li>Advanced configuration and guidance</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <!-- Real Whop checkout link -->
+        <a href="https://whop.com/checkout/plan_LV52UIXq2b4ep?a=hurtpose" class="btn btn-ember" target="_blank" rel="noopener">Become an Apprentice</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="sec community" id="community">
+  <div class="wrap">
+    <div class="glowbox">
+      <h2>The workshop lives in Discord</h2>
+      <p>
+        Anvil isn't a dashboard you log into alone — it's a community of traders learning
+        the craft together. Pull up to the forge and see what we're building.
+      </p>
+      <!-- TODO: replace # with your real Discord invite URL -->
+      <a href="#" class="btn btn-ember" target="_blank" rel="noopener">Join the Anvil Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="brand">
+          <img class="mark" src="logo.png" alt="Anvil logo">
+          ANVIL
+        </div>
+        <p>AI day-trading bots and a community built on craft, not hype.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Product</h4>
+          <a href="#tiers">Benchmark (Free)</a>
+          <a href="#tiers">Apprentice</a>
+          <a href="#how">How it works</a>
+        </div>
+        <div class="foot-col">
+          <h4>Community</h4>
+          <!-- TODO: replace # with real URLs -->
+          <a href="#">Discord</a>
+          <a href="#">X / Twitter</a>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <a href="#craft">The Craft</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Risk disclosure.</strong> Trading futures and other financial instruments
+      carries a substantial risk of loss and is not suitable for every investor. The
+      Nasdaq and other markets can move against you, and you may lose some or all of your
+      capital. Anvil provides software tools and educational community access only. We do
+      not provide personalized financial, investment, or trading advice, and nothing here
+      is a recommendation to buy or sell any instrument. Anvil makes no representation that
+      any tool, strategy, or account will be profitable or will not result in losses. Past
+      performance is not indicative of future results. Any decision to trade is yours alone;
+      consider your objectives and consult a licensed professional before trading.
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Anvil. All rights reserved.</span>
+      <span>Built at the forge.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  var btn = document.getElementById('menubtn');
+  var links = document.getElementById('navlinks');
+  btn.addEventListener('click', function(){ links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); });
+  });
+</script>
+</body>
+</html>
