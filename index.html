@@ -88,10 +88,12 @@
   .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
   .brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--paper);letter-spacing:.04em}
   .brand .mark{
-    width:34px;height:34px;flex:none;
+    width:38px;height:38px;flex:none;
     border-radius:50%;
     object-fit:cover;
-    filter:drop-shadow(0 0 10px var(--glow));
+    background:#000;
+    box-shadow:0 0 0 1px var(--steel-line), 0 0 16px -3px var(--glow);
+    filter:drop-shadow(0 0 6px var(--glow));
   }
   .nav-links{display:flex;align-items:center;gap:30px}
   .nav-links a{font-size:14.5px;color:var(--ash);transition:color .15s}
@@ -109,6 +111,23 @@
     pointer-events:none;
   }
   .hero .wrap{position:relative;z-index:2}
+  .hero-logo-bg{
+    position:absolute;top:50%;left:50%;
+    width:min(660px,116vw);height:auto;
+    transform:translate(-50%,-54%);
+    opacity:.07;z-index:0;pointer-events:none;
+    filter:grayscale(.15) brightness(1.35);
+    -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
+    mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
+  }
+  .hero-candles{
+    position:absolute;left:0;right:0;bottom:0;
+    height:250px;z-index:1;pointer-events:none;opacity:.55;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);
+    mask-image:linear-gradient(180deg,transparent,#000 45%);
+  }
+  .hero-candles svg{width:100%;height:100%;display:block}
+  @media(max-width:640px){ .hero-candles{height:160px;opacity:.4} }
   .eyebrow{
     display:inline-block;
     font-size:12.5px;letter-spacing:.22em;text-transform:uppercase;
@@ -320,6 +339,8 @@
 
 <!-- HERO -->
 <section class="hero">
+  <img class="hero-logo-bg" src="logo.png" alt="" aria-hidden="true">
+  <div class="hero-candles" id="heroCandles" aria-hidden="true"></div>
   <div class="wrap">
     <span class="eyebrow">Free automated tool for manual Nasdaq traders</span>
     <h1>Automation for the<br>manual trader. <span class="lit">Free.</span></h1>
@@ -545,6 +566,38 @@
   links.querySelectorAll('a').forEach(function(a){
     a.addEventListener('click', function(){ links.classList.remove('open'); });
   });
+
+  // Hero candlestick backdrop — deterministic, decorative
+  (function(){
+    var host = document.getElementById('heroCandles');
+    if(!host) return;
+    var NS='http://www.w3.org/2000/svg', W=1200, H=300, N=52;
+    var svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    svg.setAttribute('preserveAspectRatio','none');
+    var seed=90210; function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
+    var slot=W/N, bw=slot*0.46, y=H*0.66, lo=H*0.14, hi=H*0.9;
+    for(var i=0;i<N;i++){
+      var open=y;
+      var close=Math.max(lo, Math.min(hi, open + (rnd()-0.55)*40)); // gentle uptrend (y decreasing)
+      var wickHi=Math.max(lo, Math.min(open,close) - rnd()*20);
+      var wickLo=Math.min(hi, Math.max(open,close) + rnd()*20);
+      var x=i*slot+slot/2, bull=close<open, col=bull?'#ff7a38':'#6d4842';
+      var wick=document.createElementNS(NS,'line');
+      wick.setAttribute('x1',x); wick.setAttribute('x2',x);
+      wick.setAttribute('y1',wickHi); wick.setAttribute('y2',wickLo);
+      wick.setAttribute('stroke',col); wick.setAttribute('stroke-width','1.4');
+      svg.appendChild(wick);
+      var top=Math.min(open,close), h=Math.max(2.5, Math.abs(close-open));
+      var body=document.createElementNS(NS,'rect');
+      body.setAttribute('x',x-bw/2); body.setAttribute('y',top);
+      body.setAttribute('width',bw); body.setAttribute('height',h);
+      body.setAttribute('rx','1'); body.setAttribute('fill',col);
+      svg.appendChild(body);
+      y=close;
+    }
+    host.appendChild(svg);
+  })();
 </script>
 </body>
 </html>
