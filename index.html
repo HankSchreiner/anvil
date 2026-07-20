@@ -597,6 +597,31 @@
     }
     host.appendChild(svg);
   })();
+
+  // Telescoping parallax — the hero anvil drifts & scales independently as you scroll
+  (function(){
+    var logo = document.querySelector('.hero-logo');
+    var candles = document.getElementById('heroCandles');
+    if(!logo) return;
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    logo.style.willChange = 'transform, opacity';
+    if(candles) candles.style.willChange = 'transform';
+    var ticking = false;
+    function update(){
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var drift  = y * 0.34;                 // lags behind the page (parallax)
+      var scale  = 1 + Math.min(y, 900) * 0.00055; // telescopes larger as you descend
+      var fade   = Math.max(0, 1 - y / 560);
+      logo.style.transform = 'translate3d(0,' + drift.toFixed(1) + 'px,0) scale(' + scale.toFixed(4) + ')';
+      logo.style.opacity = fade.toFixed(3);
+      if(candles) candles.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(1) + 'px,0)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, {passive:true});
+    update();
+  })();
 </script>
 </body>
 </html>
