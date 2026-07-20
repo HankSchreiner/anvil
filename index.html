@@ -111,15 +111,13 @@
     pointer-events:none;
   }
   .hero .wrap{position:relative;z-index:2}
-  .hero-logo-bg{
-    position:absolute;top:50%;left:50%;
-    width:min(660px,116vw);height:auto;
-    transform:translate(-50%,-54%);
-    opacity:.07;z-index:0;pointer-events:none;
-    filter:grayscale(.15) brightness(1.35);
-    -webkit-mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
-    mask-image:radial-gradient(closest-side,#000 52%,transparent 100%);
+  .hero-logo{
+    display:block;margin:0 auto 28px;
+    width:140px;height:140px;
+    border-radius:50%;object-fit:cover;background:#000;
+    box-shadow:0 0 0 1px var(--steel-line), 0 12px 46px -8px var(--glow);
   }
+  @media(max-width:640px){ .hero-logo{width:104px;height:104px;margin-bottom:22px} }
   .hero-candles{
     position:absolute;left:0;right:0;bottom:0;
     height:250px;z-index:1;pointer-events:none;opacity:.55;
@@ -339,9 +337,9 @@
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-logo-bg" src="logo.png" alt="" aria-hidden="true">
   <div class="hero-candles" id="heroCandles" aria-hidden="true"></div>
   <div class="wrap">
+    <img class="hero-logo" src="logo.png" alt="Anvil">
     <span class="eyebrow">Free automated tool for manual Nasdaq traders</span>
     <h1>Automation for the<br>manual trader. <span class="lit">Free.</span></h1>
     <p class="lead">
