@@ -60,6 +60,23 @@
     color:var(--smoke);
   }
   .btn-ghost:hover{border-color:var(--ember);color:var(--paper);transform:translateY(-2px)}
+  .btn-ember-outline{
+    background:rgba(255,106,43,.06);
+    border:1px solid var(--ember);
+    color:var(--ember-2);
+  }
+  .btn-ember-outline:hover{
+    background:linear-gradient(135deg,var(--ember),var(--ember-2));
+    color:#1a0f08;transform:translateY(-2px);
+    box-shadow:0 12px 36px -10px var(--glow);
+  }
+  .btn .step-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:20px;height:20px;border-radius:50%;margin-right:9px;
+    font-size:12px;font-weight:800;vertical-align:-4px;
+    background:rgba(0,0,0,.22);
+  }
+  .btn-ember-outline .step-badge{background:rgba(255,106,43,.16)}
 
   /* ---- Nav ---- */
   header.nav{
@@ -120,6 +137,26 @@
   }
   .hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
   .hero-note{margin-top:22px;font-size:13px;color:#6f7681}
+
+  /* free spotlight banner */
+  .free-banner{
+    background:linear-gradient(90deg,rgba(255,106,43,.12),rgba(255,145,69,.05),rgba(255,106,43,.12));
+    border-bottom:1px solid var(--steel-line);
+  }
+  .free-banner .wrap{
+    display:flex;align-items:center;justify-content:center;gap:18px;
+    padding:18px 24px;flex-wrap:wrap;text-align:center;
+  }
+  .fb-pill{
+    flex:none;
+    background:linear-gradient(135deg,var(--ember),var(--ember-2));
+    color:#1a0f08;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 15px;border-radius:999px;
+    box-shadow:0 6px 20px -6px var(--glow);
+  }
+  .free-banner p{color:var(--smoke);font-size:15.5px;margin:0;max-width:640px}
+  .free-banner a{color:var(--ember-2);border-bottom:1px solid rgba(255,106,43,.45)}
+  .free-banner a:hover{color:var(--spark)}
 
   /* subtle ember bar under hero */
   .forge-line{
@@ -208,6 +245,7 @@
     transform:rotate(-45deg);border-radius:1px;
   }
   .tier .btn{width:100%;text-align:center}
+  .tier-steps{display:flex;flex-direction:column;gap:10px}
 
   /* ---- Community CTA ---- */
   .community{
@@ -272,8 +310,7 @@
       <a href="#how">How It Works</a>
       <a href="#tiers">Tiers</a>
       <a href="#community">Community</a>
-      <!-- TODO: replace # with your real Benchmark signup URL -->
-      <a href="#" class="btn btn-ember nav-cta">Try Benchmark — Free</a>
+      <a href="https://whop.com/checkout/plan_CGEQMh3H2BtDo?a=hurtpose" target="_blank" rel="noopener" class="btn btn-ember nav-cta">Try Benchmark — Free</a>
     </nav>
     <button class="menu-btn" id="menubtn" aria-label="Menu">☰</button>
   </div>
@@ -284,23 +321,32 @@
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">AI trading bots for the Nasdaq</span>
-    <h1>Forge your edge<br>at the <span class="lit">anvil</span>.</h1>
+    <span class="eyebrow">Free automated tool for manual Nasdaq traders</span>
+    <h1>Automation for the<br>manual trader. <span class="lit">Free.</span></h1>
     <p class="lead">
-      Anvil builds AI day-trading bots for traders who want to sharpen a real skill —
-      not chase a jackpot. Start with the free Benchmark bot, learn the craft alongside
-      the community, and pick up the hammer when you're ready.
+      Benchmark is Anvil's free automated tool for people who trade the Nasdaq by hand.
+      Bring automation to the way you already trade — no cost to start, no card, yours to keep.
+      When you want the sharper tools, the Apprentice tier is there.
     </p>
     <div class="hero-cta">
-      <!-- TODO: replace # with your real Benchmark signup URL -->
-      <a href="#" class="btn btn-ember">Try the Benchmark bot — free</a>
-      <a href="#tiers" class="btn btn-ghost">See the Apprentice tier</a>
+      <!-- TODO: replace href with your free Benchmark product URL on Whop (add ?a=hurtpose for affiliate credit) -->
+      <a href="https://whop.com/checkout/plan_CGEQMh3H2BtDo?a=hurtpose" target="_blank" rel="noopener" class="btn btn-ember"><span class="step-badge">1</span>Get the free tool</a>
+      <!-- TODO: replace href with your permanent Discord invite (discord.gg/...) -->
+      <a href="https://discord.gg/UaBbcfxQZB" target="_blank" rel="noopener" class="btn btn-ember-outline"><span class="step-badge">2</span>Set it up in Discord</a>
     </div>
-    <p class="hero-note">Free to start. No card required for Benchmark.</p>
+    <p class="hero-note">Two steps, both required — get the free Benchmark tool on Whop, then join the Discord for the setup guide. Free to start; no card needed.</p>
   </div>
 </section>
 
 <div class="forge-line"></div>
+
+<!-- FREE SPOTLIGHT -->
+<section class="free-banner">
+  <div class="wrap">
+    <span class="fb-pill">100% Free to start</span>
+    <p>Benchmark is a working automated tool for manual Nasdaq traders — no cost, no card. The paid <a href="#tiers">Apprentice</a> tier is entirely optional.</p>
+  </div>
+</section>
 
 <!-- PHILOSOPHY -->
 <section class="sec philosophy">
@@ -324,8 +370,8 @@
     <div class="grid">
       <div class="card">
         <div class="ico">⚒️</div>
-        <h3>Bots you actually run</h3>
-        <p>The Benchmark bot is a real, working tool you can put on the Nasdaq from day one — free. Learn how it thinks before you ever pay a cent.</p>
+        <h3>Built for manual traders</h3>
+        <p>Benchmark is a free automated tool that works alongside the way you already trade the Nasdaq by hand — real, running, and yours from day one at no cost.</p>
       </div>
       <div class="card">
         <div class="ico">📓</div>
@@ -368,7 +414,7 @@
       <div class="step">
         <div class="num">1</div>
         <h3>Light the forge</h3>
-        <p>Set up the free Benchmark bot and connect with the community in Discord. Get hands-on before you commit to anything.</p>
+        <p>Grab the free Benchmark bot on Whop, then join the Anvil Discord — that's where the setup guide and the community live. You'll need both.</p>
       </div>
       <div class="step">
         <div class="num">2</div>
@@ -403,8 +449,12 @@
           <li>Getting-started guides and setup help</li>
           <li>No card required to begin</li>
         </ul>
-        <!-- TODO: replace # with your real Benchmark signup URL -->
-        <a href="#" class="btn btn-ghost">Start with Benchmark</a>
+        <div class="tier-steps">
+          <!-- TODO: replace href with your free Benchmark product URL on Whop (add ?a=hurtpose) -->
+          <a href="https://whop.com/checkout/plan_CGEQMh3H2BtDo?a=hurtpose" target="_blank" rel="noopener" class="btn btn-ember"><span class="step-badge">1</span>Get the bot on Whop</a>
+          <!-- TODO: replace href with your permanent Discord invite (discord.gg/...) -->
+          <a href="https://discord.gg/UaBbcfxQZB" target="_blank" rel="noopener" class="btn btn-ember-outline"><span class="step-badge">2</span>Join Discord to set up</a>
+        </div>
       </div>
       <div class="tier featured">
         <span class="flag">The Craftsman's Tier</span>
@@ -434,8 +484,7 @@
         Anvil isn't a dashboard you log into alone — it's a community of traders learning
         the craft together. Pull up to the forge and see what we're building.
       </p>
-      <!-- TODO: replace # with your real Discord invite URL -->
-      <a href="#" class="btn btn-ember" target="_blank" rel="noopener">Join the Anvil Discord</a>
+      <a href="https://discord.gg/UaBbcfxQZB" class="btn btn-ember" target="_blank" rel="noopener">Join the Anvil Discord</a>
     </div>
   </div>
 </section>
@@ -460,14 +509,12 @@
         </div>
         <div class="foot-col">
           <h4>Community</h4>
-          <!-- TODO: replace # with real URLs -->
-          <a href="#">Discord</a>
-          <a href="#">X / Twitter</a>
+          <a href="https://discord.gg/UaBbcfxQZB" target="_blank" rel="noopener">Discord</a>
         </div>
         <div class="foot-col">
           <h4>Company</h4>
           <a href="#craft">The Craft</a>
-          <a href="#">Contact</a>
+          <a href="https://discord.gg/UaBbcfxQZB" target="_blank" rel="noopener">Contact</a>
         </div>
       </div>
     </div>
