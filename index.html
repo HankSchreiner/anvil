@@ -609,9 +609,9 @@
     var ticking = false;
     function update(){
       var y = window.pageYOffset || document.documentElement.scrollTop || 0;
-      var drift  = y * 0.34;                 // lags behind the page (parallax)
-      var scale  = 1 + Math.min(y, 900) * 0.00055; // telescopes larger as you descend
-      var fade   = Math.max(0, 1 - y / 560);
+      var drift  = -y * 0.18;                // recede UP, away from content below (no overlap)
+      var scale  = 1 + Math.min(y, 700) * 0.00040; // gentle telescope
+      var fade   = Math.max(0, 1 - y / 430); // fade out before it reaches the nav
       logo.style.transform = 'translate3d(0,' + drift.toFixed(1) + 'px,0) scale(' + scale.toFixed(4) + ')';
       logo.style.opacity = fade.toFixed(3);
       if(candles) candles.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(1) + 'px,0)';
